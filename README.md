@@ -19,7 +19,7 @@ For each invocation:
 1. Delete stale coverage artifacts:
    - `target/site/jacoco/`
    - `target/jacoco.exec`
-2. Run `mvn -q org.jacoco:jacoco-maven-plugin:0.8.12:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.12:report`
+2. Run `mvn -q test org.jacoco:jacoco-maven-plugin:<version>:report` if the project's effective pom (`mvn help:effective-pom`) already binds jacoco's `prepare-agent` — `<version>` is the project's own — otherwise `mvn -q org.jacoco:jacoco-maven-plugin:0.8.12:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.12:report`. A second agent on top of the project's own crashes the forked test JVM (`LinkageError` on `java.lang.$JaCoCo`), so the first form never adds one.
 3. Read `target/site/jacoco/jacoco.xml`
 4. Analyze selected Java files
 

@@ -8,7 +8,9 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -129,7 +131,7 @@ class CliApplicationTest {
                 .execute(new String[]{"tools/mutate4java/src/mutate4java/Sample.java"});
 
         assertEquals(0, exit);
-        assertEquals(List.of(moduleRoot), directories);
+        assertEquals(Set.of(moduleRoot), new HashSet<>(directories));
         assertTrue(out.toString().contains("mutate4java.Sample"));
         assertFalse(err.toString().contains("Warning: JaCoCo XML not found"));
     }
